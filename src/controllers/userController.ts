@@ -45,7 +45,7 @@ export const login = async (req: Request, res: Response) => {
                 expiresIn: '2h'
             });
 
-        res.json({ msg: "Logado com sucesso", status: true, token });
+        res.json({ msg: "Logado com sucesso", status: true, isAdmin: user.isAdmin, token });
         return;
     }
 
