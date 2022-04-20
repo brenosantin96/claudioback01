@@ -1,0 +1,5 @@
+CREATE TABLE provedores (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NULL,
+  `createdAt` DATETIME NULL,
+  PRIMARY KEY (`id`));
