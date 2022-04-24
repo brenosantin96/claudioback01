@@ -5,10 +5,14 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
+type Provedores = {
+    name: string
+}
 
 export const listProvedores = async (req: Request, res: Response) => {
     const provedores = await Provedor.findAll();
     res.json({ provedores: provedores });
+    return;
 
 }
 
@@ -29,9 +33,7 @@ export const createProvedor = async (req: Request, res: Response) => {
 
 }
 
-type Provedores = {
-    name: string
-}
+
 
 export const updateProvedor = async (req: Request, res: Response) => {
     let id = req.params.id;
@@ -42,16 +44,16 @@ export const updateProvedor = async (req: Request, res: Response) => {
     let updates: Provedores = { name: '' };
 
     if (name === "" || name === null || name === undefined) {
-        res.json({msg: "Nao foi possivel atualizar, informe o campo a ser atualizado."});
+        res.json({ msg: "Nao foi possivel atualizar, informe o campo a ser atualizado." });
         return;
     }
 
     if (provedor) {
         updates.name = name;
-        provedor.update({name: name});
-        res.json({msg: "Provedor atualizado com sucesso", provedor});
+        provedor.update({ name: name });
+        res.json({ msg: "Provedor atualizado com sucesso", provedor });
     } else {
-        res.json({msg: "Nao foi possivel atualizar este provedor"})
+        res.json({ msg: "Nao foi possivel atualizar este provedor" })
     }
 
 }
