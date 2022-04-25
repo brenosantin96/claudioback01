@@ -22,7 +22,8 @@ export const createProvedor = async (req: Request, res: Response) => {
     console.log(req.body)
 
     if (!name) {
-        res.json({ msg: "Nome precisa ser preenchido." })
+        res.json({ msg: "Nome precisa ser preenchido." });
+        return;
     }
 
     const provedor = new Provedor();
@@ -30,6 +31,7 @@ export const createProvedor = async (req: Request, res: Response) => {
     provedor.name = name;
     const info = await provedor.save();
     res.json({ msg: "Provedor cadastrado com sucesso", info });
+    return;
 
 }
 
