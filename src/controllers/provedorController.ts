@@ -16,6 +16,19 @@ export const listProvedores = async (req: Request, res: Response) => {
 
 }
 
+export const getOneProvedor = async (req: Request, res: Response) => {
+    let { id } = req.params;
+
+    const provedor = await Provedor.findByPk(id);
+    if (provedor) {
+        res.json({ provedor: provedor });
+        return
+    } else {
+        res.json({ msg: "Não foi possível encontrar provedor com esse ID informado", name: "Não encontrado" })
+    }
+
+}
+
 export const createProvedor = async (req: Request, res: Response) => {
     let { name } = req.body;
 

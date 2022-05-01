@@ -15,6 +15,7 @@ router.post('/signup', UserController.signUp);
 
 //provedores
 router.get('/provedores', provedorController.listProvedores);
+router.get('/provedores/:id', provedorController.getOneProvedor);
 router.post('/provedores', provedorController.createProvedor);
 router.put('/provedores/:id', provedorController.updateProvedor);
 router.delete('/provedores/:id', provedorController.deleteProvedor);
