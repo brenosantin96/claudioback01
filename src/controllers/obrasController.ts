@@ -48,17 +48,24 @@ export const createObra = async (req: Request<ParamsDictionary, any, ObraType>, 
 
     if (presupuesto) {
         let stringPresupuesto = presupuesto.toString();
-        stringPresupuesto = stringPresupuesto.replace('.', '').replace(',', '.').replace('R$', '').replace('R$ ', '');
+        stringPresupuesto = stringPresupuesto.replace('.', '').replace(',', '.').replace('€', '').replace('€ ', '');
         let presupuestoFloat = parseFloat(stringPresupuesto);
         presupuesto = presupuestoFloat;
         obra.presupuesto = presupuesto;
     }
 
-
-    obra.name = name;
-    obra.direccion = direccion;
-    obra.presupuesto = presupuesto;
-    obra.dateStart = dateStart;
+    if(name){
+        obra.name = name;
+    }
+    if(direccion){
+        obra.direccion = direccion;
+    }
+    if(presupuesto) {
+        obra.presupuesto = presupuesto;
+    }
+    if(dateStart){
+        obra.dateStart = dateStart;
+    }
 
     const info = await obra.save();
     res.json({ msg: "Obra cadastrada com sucesso", info });
@@ -102,7 +109,7 @@ export const updateObra = async (req: Request<ParamsDictionary, any, ObraType>, 
             updatesObra.dateStart = dateStart;
         } 
 
-        //Aqui eu tenho que atualizar mas tem que achar um jeito de atualizar só oq foi modificiado..
+        //Atualizando com as infos que foram informadas apenas
         obra.update({
             name: updatesObra.name, direccion: updatesObra.direccion,
             presupuesto: updatesObra.presupuesto, dateStart: updatesObra.dateStart
