@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import './helpers/associations';
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
@@ -6,7 +7,7 @@ import cors from 'cors';
 import apiRoutes from './routes/api';
 import {db} from './instances/mysql';
 import bodyparser from "body-parser";
-const expresJson = require("express-json");
+import dbInit from './helpers/init'; 
 
 dotenv.config();
 
@@ -29,5 +30,7 @@ server.listen(process.env.PORT, () => {
 db.authenticate().then(()=> {console.log("Autenticado no DB com sucesso")})
 .catch((err)=> {
     console.log(`Deu algum erro na hora de autenticar: ${err}`);
-})
+});
+
+dbInit();
 

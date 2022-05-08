@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { db } from '../instances/mysql';
+import { Factura } from './Factura';
 
 export interface ProvedorInstance extends Model {
     id: number;
@@ -14,7 +15,7 @@ export const Provedor = db.define<ProvedorInstance>('Provedor', {
     },
     name: {
         type: DataTypes.STRING,
-        unique: true
+        allowNull: false
     },
 }, {
     tableName: 'provedores',
@@ -22,3 +23,5 @@ export const Provedor = db.define<ProvedorInstance>('Provedor', {
     createdAt: true,
     updatedAt: false
 });
+
+

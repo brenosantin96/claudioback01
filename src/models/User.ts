@@ -16,10 +16,12 @@ export const User = db.define<UserInstance>('User', {
     },
     email: {
         type: DataTypes.STRING,
-        unique: true
+        unique: true,
+        allowNull: false
     },
     password: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     isAdmin: {
         type: DataTypes.BOOLEAN

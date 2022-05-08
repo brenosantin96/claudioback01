@@ -3,7 +3,7 @@ import { Obra } from '../models/Obra'
 import dotenv from 'dotenv';
 import { ParamsDictionary } from "express-serve-static-core";
 
-type ObraType = {
+export type ObraType = {
     name: string;
     direccion: string;
     presupuesto: number;
@@ -48,7 +48,9 @@ export const createObra = async (req: Request<ParamsDictionary, any, ObraType>, 
 
     if (presupuesto) {
         let stringPresupuesto = presupuesto.toString();
-        stringPresupuesto = stringPresupuesto.replace('.', '').replace(',', '.').replace('€', '').replace('€ ', '');
+        console.log(stringPresupuesto);
+        stringPresupuesto = stringPresupuesto.replace(',', '.').replace('€', '');
+        console.log("Novamente: ", stringPresupuesto);
         let presupuestoFloat = parseFloat(stringPresupuesto);
         presupuesto = presupuestoFloat;
         obra.presupuesto = presupuesto;

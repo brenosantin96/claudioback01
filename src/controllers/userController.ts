@@ -15,10 +15,10 @@ export const signUp = async (req: Request, res: Response) => {
         if (hasUser) { res.json({ error: 'Não foi possível cadastrar, email já existe.' }); return; }
         if (!hasUser) {
 
-            let senhaCriptografada = await bcrypt.hash(password, 10, (hash) => { console.log(hash); return hash; });
+            let senhaCriptografada = await bcrypt.hash(password, 10);
 
             if (senhaCriptografada !== undefined) {
-                let newUser = await User.create({ email, senhaCriptografada, isAdmin });
+                let newUser = await User.create({ email, password: senhaCriptografada, isAdmin });
                 console.log(newUser);
                 const token = JWT.sign({ id: newUser.id, email: newUser.email, password: newUser.password },
                     process.env.JWT_SECRET_KEY as string,

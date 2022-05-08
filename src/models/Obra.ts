@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { db } from '../instances/mysql';
+import { Factura } from './Factura';
 
 export interface ObraInstance extends Model {
     id: number;
@@ -17,9 +18,11 @@ export const Obra = db.define<ObraInstance>('Obra', {
     },
     name: {
         type: DataTypes.STRING,
+        allowNull: false
     },
     direccion: {
         type: DataTypes.STRING,
+        allowNull: false
     },
     presupuesto: {
         type: DataTypes.FLOAT
@@ -31,3 +34,5 @@ export const Obra = db.define<ObraInstance>('Obra', {
     tableName: 'obras',
     timestamps: false
 });
+
+
