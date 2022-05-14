@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { db } from '../instances/mysql';
+import {db} from '../instances/mysql';
 import {ProvedorType} from '../controllers/provedorController';
 import {ObraType} from '../controllers/obrasController';
 import { Provedor } from './Provedor';
@@ -15,7 +15,7 @@ export interface FacturaInstance extends Model {
     
 }
 
-export const Factura = db.define<FacturaInstance>('Obra', {
+export const Factura = db.define<FacturaInstance>('Factura', {
     id: {
         primaryKey: true,
         autoIncrement: true,
@@ -34,6 +34,15 @@ export const Factura = db.define<FacturaInstance>('Obra', {
         type: DataTypes.FLOAT,
         allowNull: false
     }
+   // provedorid: {
+   //     fk in provedorTable
+   //     type: DataTypes.INTEGER,
+   //     allowNull: false
+   // },
+   // obraid: {
+   //    type: DataTypes.INTEGER,
+   //    allowNull: false
+   // }
 }, {
     tableName: 'facturas',
     timestamps: false

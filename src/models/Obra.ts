@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { db } from '../instances/mysql';
+import {db} from '../instances/mysql';
 import { Factura } from './Factura';
 
 export interface ObraInstance extends Model {

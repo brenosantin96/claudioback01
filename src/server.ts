@@ -7,7 +7,7 @@ import cors from 'cors';
 import apiRoutes from './routes/api';
 import {db} from './instances/mysql';
 import bodyparser from "body-parser";
-import dbInit from './helpers/init'; 
+
 
 dotenv.config();
 
@@ -26,11 +26,13 @@ server.listen(process.env.PORT, () => {
     console.log("Server iniciado.")
 });
 
+
+//Sync DB
+db.sync(({alter : true})).then(()=> {}).catch((err)=> {console.log("Deu algum erro na SYNC:", err)});
+
 //Test DB
 db.authenticate().then(()=> {console.log("Autenticado no DB com sucesso")})
 .catch((err)=> {
     console.log(`Deu algum erro na hora de autenticar: ${err}`);
 });
-
-dbInit();
 

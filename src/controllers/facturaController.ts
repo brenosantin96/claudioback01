@@ -36,12 +36,12 @@ export const getOneFactura = async (req: Request, res: Response) => {
         const factura = await Factura.findByPk(id);
 
         if (factura) {
-            let facturaID = factura.id;
-            let facturaNumber = factura.number;
-            let facturaDate = factura.dateFactura;
-            let facturaValor = factura.valor;
-            let facturaProvedor = factura.provedor.name;
-            let facturaObra = factura.obra.name;
+          //  let facturaID = factura.id;
+          //  let facturaNumber = factura.number;
+          //  let facturaDate = factura.dateFactura;
+          //  let facturaValor = factura.valor;
+          //  let facturaProvedor = factura.provedor.name;
+          //  let facturaObra = factura.obra.name;
 
             res.json({ factura })
             return;
