@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 export type ProvedorType = {
+    id: number,
     name: string
 }
 
@@ -56,17 +57,17 @@ export const updateProvedor = async (req: Request, res: Response) => {
 
     const provedor = await Provedor.findByPk(id);
 
-    let updates: ProvedorType = { name: '' };
-
+    
     if (name === "" || name === null || name === undefined) {
         res.json({ msg: "Nao foi possivel atualizar, informe o campo a ser atualizado." });
         return;
     }
-
+    
     if (provedor) {
-        updates.name = name;
         provedor.update({ name: name });
         res.json({ msg: "Provedor atualizado com sucesso", provedor });
+
+        
     } else {
         res.json({ msg: "Nao foi possivel atualizar este provedor" })
     }

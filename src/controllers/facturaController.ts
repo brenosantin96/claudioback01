@@ -5,6 +5,7 @@ import { ParamsDictionary } from "express-serve-static-core";
 import { ProvedorType } from './provedorController';
 import { ObraType } from './obrasController';
 import { Factura } from '../models/Factura';
+import { Provedor } from '../models/Provedor';
 
 dotenv.config();
 export type FacturaType = {
@@ -36,12 +37,8 @@ export const getOneFactura = async (req: Request, res: Response) => {
         const factura = await Factura.findByPk(id);
 
         if (factura) {
-          //  let facturaID = factura.id;
-          //  let facturaNumber = factura.number;
-          //  let facturaDate = factura.dateFactura;
-          //  let facturaValor = factura.valor;
-          //  let facturaProvedor = factura.provedor.name;
-          //  let facturaObra = factura.obra.name;
+
+            //factura.provedor.
 
             res.json({ factura })
             return;
