@@ -8,3 +8,4 @@ Factura.belongsTo(Provedor);
 
 Obra.hasMany(Factura);
 Factura.belongsTo(Obra);
+

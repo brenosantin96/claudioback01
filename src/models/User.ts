@@ -30,3 +30,4 @@ export const User = db.define<UserInstance>('User', {
     tableName: 'users',
     timestamps: false
 });
+
