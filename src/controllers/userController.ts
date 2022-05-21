@@ -73,6 +73,10 @@ export const login = async (req: Request, res: Response) => {
     return
 };
 
+export const tokenIsValid = async (req: Request, res: Response) => {
+    
+}
+
 export const getAllUsers = async (req: Request, res: Response) => {
 
     let users = await User.findAll();

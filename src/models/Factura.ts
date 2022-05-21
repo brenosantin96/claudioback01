@@ -34,14 +34,23 @@ export const Factura = db.define<FacturaInstance>('Factura', {
         type: DataTypes.FLOAT,
         allowNull: false
     }
-   // provedorid: {
-   //     fk in provedorTable
+  //  provedor_id: {
+   //     fk 
    //     type: DataTypes.INTEGER,
-   //     allowNull: false
-   // },
-   // obraid: {
-   //    type: DataTypes.INTEGER,
-   //    allowNull: false
+   //     allowNull: false,
+   //     references: {
+   //         model: Provedor,
+   //         key: 'id'
+   //     }
+  //  },
+  //  obra_id: {
+  //      //fk
+  //     type: DataTypes.INTEGER,
+  //     allowNull: false,
+  //     references: {
+   //        model: Obra,
+   //        key: 'id'
+   //    }
    // }
 }, {
     tableName: 'facturas',

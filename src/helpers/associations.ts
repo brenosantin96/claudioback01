@@ -3,7 +3,7 @@ import {Obra} from '../models/Obra';
 import {Provedor} from '../models/Provedor';
 import {User} from '../models/User';
 
-Provedor.hasMany(Factura);
+Provedor.hasMany(Factura , );
 Factura.belongsTo(Provedor);
 
 Obra.hasMany(Factura);
