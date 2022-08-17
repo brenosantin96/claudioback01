@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import './helpers/associations';
 import path from 'path';
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import apiRoutes from './routes/api';
 import { db } from './instances/mysql';
 import bodyparser from "body-parser";
@@ -25,6 +25,7 @@ const server = express();
 server.use(cors());
 server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 server.use(bodyparser.json()) // save this line!
 server.use(apiRoutes);
 
@@ -34,7 +35,7 @@ server.listen(process.env.PORT, () => {
 });
 
 
-/* 
+ 
 //Sync DB
 db.sync(({ alter: true })).then(() => {
 
@@ -77,7 +78,7 @@ db.sync(({ alter: true })).then(() => {
         console.log("Erro ao fazer factura", err);
     })
 
-}).catch((err) => { console.log("Deu algum erro ao sincronizar o ORM com o BANCO DE DADOS:", err) }); */
+}).catch((err) => { console.log("Deu algum erro ao sincronizar o ORM com o BANCO DE DADOS:", err) }); 
 
 
 
