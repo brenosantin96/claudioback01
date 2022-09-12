@@ -30,7 +30,7 @@ server.use(bodyparser.json()) // save this line!
 server.use(apiRoutes);
 
 
-server.listen(process.env.PORT, () => {
+server.listen(process.env.PORT || 4000, () => {
     console.log("Server iniciado.")
 });
 
