@@ -4,13 +4,14 @@ import * as UserController from '../controllers/userController';
 import * as provedorController from '../controllers/provedorController';
 import * as obraController from '../controllers/obrasController';
 import * as facturaController from '../controllers/facturaController';
+import * as pontoController from '../controllers/pontoController';
 import {Auth} from '../middlewares/Auth';
 
 
 const router = Router();
 
 router.get('/ping', UserController.ping);
-router.get('/users', Auth.private, UserController.getAllUsers);
+router.get('/users', Auth.privateAdmin, UserController.getAllUsers);
 router.post('/login', UserController.login);
 router.post('/signup', UserController.signUp);
 
@@ -34,6 +35,9 @@ router.get('/facturas/:id', facturaController.getOneFactura);
 router.post('/facturas', facturaController.createFactura);
 router.put('/facturas/:id', facturaController.updateFactura);
 router.delete('/facturas/:id', facturaController.deleteFactura);
+
+//ponto
+router.post('/ponto', Auth.private, pontoController.registerPoint);
 
 
 export default router;

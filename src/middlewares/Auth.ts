@@ -23,6 +23,7 @@ export const Auth = {
                     const decoded = JWT.verify(token, process.env.JWT_SECRET_KEY as string);
                     console.log("Decoded: ", decoded);
                     success = true;
+                    res.locals.decoded = decoded;
                 } catch (error) {
                     console.log("Deu erro em algo:", error);
                 }

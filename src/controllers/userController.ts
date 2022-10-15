@@ -8,7 +8,7 @@ dotenv.config();
 
 export const signUp = async (req: Request, res: Response) => {
 
-    let { email, password, isAdmin = false } = req.body;
+    let { email, name, password, isAdmin = false } = req.body;
 
     if (email.length > 0 && password.length > 0) {
         let hasUser = await User.findOne({ where: { email } });
@@ -18,9 +18,9 @@ export const signUp = async (req: Request, res: Response) => {
             let senhaCriptografada = await bcrypt.hash(password, 10);
 
             if (senhaCriptografada !== undefined) {
-                let newUser = await User.create({ email, password: senhaCriptografada, isAdmin });
+                let newUser = await User.create({ email, name, password: senhaCriptografada, isAdmin });
                 console.log(newUser);
-                const token = JWT.sign({ id: newUser.id, email: newUser.email, password: newUser.password },
+                const token = JWT.sign({ id: newUser.id, email: newUser.email, name: newUser.name, password: newUser.password },
                     process.env.JWT_SECRET_KEY as string,
                     {
                         expiresIn: '2h'
@@ -57,7 +57,7 @@ export const login = async (req: Request, res: Response) => {
         }
 
         if (matchedPasswords) {
-            const token = JWT.sign({ id: user.id, email: user.email, password: user.password },
+            const token = JWT.sign({ id: user.id, email: user.email, name: user.name, password: user.password },
                 process.env.JWT_SECRET_KEY as string,
                 {
                     expiresIn: '2h'
