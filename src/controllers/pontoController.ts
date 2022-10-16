@@ -12,14 +12,12 @@ dotenv.config();
 export const registerPoint = async (req: Request, res: Response) => {
 
     const decodedUser = res.locals.decoded;
-
     const user = await User.findByPk(decodedUser.id);
-
 
     const TODAY_START = new Date().setHours(0, 0, 0, 0);
     const NOW = new Date();
 
-    const markedPoints = await Ponto.findAll({
+    const markedPointsOfDay = await Ponto.findAll({
         where: {
             datePoint: {
                 [Op.gt]: TODAY_START,
@@ -28,7 +26,19 @@ export const registerPoint = async (req: Request, res: Response) => {
         }
     });
 
-    if (!markedPoints || markedPoints.length === 0) {
+    const markedPointsOfDayByUser = await Ponto.findAll({
+        where: {
+            datePoint: {
+                [Op.gt]: TODAY_START,
+                [Op.lt]: NOW
+            },
+            UserId: (user !== null) ? user.id : decodedUser.id
+        }
+    })
+
+
+
+    if (!markedPointsOfDay || markedPointsOfDay.length === 0) {
         const ponto = new Ponto;
         ponto.datePoint = new Date();
         if (user) {
@@ -36,16 +46,36 @@ export const registerPoint = async (req: Request, res: Response) => {
             ponto.UserId = user.id as number;
             console.log(ponto.UserId);
         }
-        ponto.numPoint = (ponto.numPoint === null || ponto.numPoint === undefined) ? ponto.numPoint = 1 : ponto.numPoint = ponto.numPoint + 1;
+
+        if (markedPointsOfDayByUser) {
+            ponto.numPoint = markedPointsOfDayByUser.length + 1;
+        }
+
         const newPoint = await ponto.save();
         res.json({ msg: "Ponto registrado com sucesso", msg2: "Caiu no IF de quando nao encontrou ponto do DIA", newPoint })
         return;
 
     }
 
-    if (markedPoints) {
-        res.json({ msg: "Caiu no IF de quando existe o PONTO BATIDO: ", markedPoints });
+    if (markedPointsOfDay) {
+
+        const ponto = new Ponto;
+        ponto.datePoint = new Date();
+
+        if (user) {
+            ponto.UserId = user.id as number;
+        }
+
+        if (markedPointsOfDayByUser) {
+            ponto.numPoint = markedPointsOfDayByUser.length + 1;
+        } 
+        
+
+        const newPoint = await ponto.save();
+        res.json({ msg: "ponto registrado", markedPoint: newPoint, markedPointsOfDayByUser });
         return;
+
+
     }
 
     return;
