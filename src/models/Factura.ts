@@ -4,14 +4,16 @@ import {ProvedorType} from '../controllers/provedorController';
 import {ObraType} from '../controllers/obrasController';
 import { Provedor } from './Provedor';
 import { Obra } from './Obra';
+import { ConductorType } from '../controllers/conductorController';
 
 export interface FacturaInstance extends Model {
     id: number;
     number: number;
     dateFactura: Date;
     valor: number;
-    provedor: ProvedorType
-    obra: ObraType
+    ProvedorId: number;
+    ObraId: number;
+    ConductorId: number;
     
 }
 
@@ -51,7 +53,16 @@ export const Factura = db.define<FacturaInstance>('Factura', {
    //        model: Obra,
    //        key: 'id'
    //    }
-   // }
+   // },
+   //  conductor_id: {
+  //      //fk
+  //     type: DataTypes.INTEGER,
+  //     allowNull: false,
+  //     references: {
+   //        model: Obra,
+   //        key: 'id'
+   //    }
+   // },
 }, {
     tableName: 'facturas',
     timestamps: false

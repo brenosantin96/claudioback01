@@ -3,6 +3,7 @@ import { Obra } from '../models/Obra';
 import { Provedor } from '../models/Provedor';
 import { User } from '../models/User';
 import bcrypt from 'bcrypt';
+import { Conductor } from '../models/Conductor';
 
 export function populateDB() {
     let passwordClaudio = '1234';
@@ -35,12 +36,21 @@ export function populateDB() {
         { name: 'Obra03', direccion: 'Calle General Ricardos, 32', presupuesto: 45788.22, dateStart: new Date('2021-09-17') },
     ], { ignoreDuplicates: true }).then(() => { });
 
+    Conductor.bulkCreate([
+        { name: 'Robson', active: true },
+        { name: 'Alex', active: true },
+        { name: 'Claudio', active: true }
+    ], { ignoreDuplicates: true }).then(() => {
+        console.log("conductores added to Database");
+    });
 
-    Factura.bulkCreate([
-        { number: 1, dateFactura: new Date('2022-05-18'), valor: 541.00, provedor: 1, obra: 1 },
-        { number: 2, dateFactura: new Date('2022-01-29'), valor: 421.00, provedor: 2, obra: 3 },
-        { number: 3, dateFactura: new Date('2022-02-20'), valor: 17.50, provedor: 3, obra: 1 },
-    ], { ignoreDuplicates: true }).then(() => { }).catch((err) => {
-        console.log("Erro ao fazer factura", err);
-    })
+
 }
+
+/* Factura.bulkCreate([
+    { number: 1, dateFactura: new Date('2022-05-18'), valor: 541.00, provedor: 1, obra: 1 },
+    { number: 2, dateFactura: new Date('2022-01-29'), valor: 421.00, provedor: 2, obra: 3 },
+    { number: 3, dateFactura: new Date('2022-02-20'), valor: 17.50, provedor: 3, obra: 1 },
+], { ignoreDuplicates: true }).then(() => { }).catch((err) => {
+    console.log("Erro ao fazer factura", err);
+}); */

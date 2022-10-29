@@ -5,6 +5,8 @@ import * as provedorController from '../controllers/provedorController';
 import * as obraController from '../controllers/obrasController';
 import * as facturaController from '../controllers/facturaController';
 import * as pontoController from '../controllers/pontoController';
+import * as conductorController from '../controllers/conductorController';
+
 import {Auth} from '../middlewares/Auth';
 
 
@@ -35,6 +37,13 @@ router.get('/facturas/:id', facturaController.getOneFactura);
 router.post('/facturas', facturaController.createFactura);
 router.put('/facturas/:id', facturaController.updateFactura);
 router.delete('/facturas/:id', facturaController.deleteFactura);
+
+//conductores
+router.get('/conductores', conductorController.listConductores);
+router.get('/conductores/:id', conductorController.getOneConductor);
+router.post('/conductores', conductorController.createConductor);
+router.put('/conductores/:id', conductorController.updateConductor);
+router.delete('/conductores/:id', conductorController.deleteConductor);
 
 //ponto
 router.post('/ponto', Auth.private, pontoController.registerPoint);
