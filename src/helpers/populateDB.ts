@@ -1,3 +1,4 @@
+//Esses imports foram feitos aqui apenas para POPULAR O DB em fase de testes, depois apagar todos imports abaixo dessa linha.
 import { Factura } from '../models/Factura'
 import { Obra } from '../models/Obra';
 import { Provedor } from '../models/Provedor';
@@ -6,7 +7,10 @@ import bcrypt from 'bcrypt';
 import { Conductor } from '../models/Conductor';
 
 export function populateDB() {
-    let passwordClaudio = '1234';
+
+    console.log("Function populateDB Comment by now...")
+
+    /* let passwordClaudio = '1234';
     let passwordJose = '4321';
 
     let passHashClaudio: string;
@@ -43,7 +47,7 @@ export function populateDB() {
     ], { ignoreDuplicates: true }).then(() => {
         console.log("conductores added to Database");
     });
-
+ */
 
 }
 

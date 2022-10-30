@@ -75,7 +75,7 @@ export const createFactura = async (req: Request, res: Response) => {
         let factura = new Factura();
 
         if (valor) {
-            factura.valor = convertToMoney(number);
+            factura.valor = convertToMoney(valor);
         }
 
         factura.number = parseInt(number);
