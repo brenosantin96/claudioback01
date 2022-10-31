@@ -115,7 +115,7 @@ export const updateObra = async (req: Request<ParamsDictionary, any, ObraType>, 
         obra.update({
             name: updatesObra.name, direccion: updatesObra.direccion,
             presupuesto: updatesObra.presupuesto, dateStart: updatesObra.dateStart
-        }).then(() => { res.json({ msg: "Obra atualizada com sucesso", obra }); return })
+        }).then(() => { res.json({ msg: "Factura acutalizada con suceso", obra }); return })
     }
 }
 

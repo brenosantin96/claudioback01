@@ -12,13 +12,12 @@ import { convertToMoney } from '../helpers/convertNumbers'
 dotenv.config();
 
 export type FacturaType = {
-    id: number;
     number: number;
     dateFactura: Date;
     valor: number;
-    proveedorID: number;
-    obraID: number,
-    conductorID: number
+    ProvedorId: number;
+    ObraId: number,
+    ConductorId: number
 
 }
 
@@ -92,14 +91,69 @@ export const createFactura = async (req: Request, res: Response) => {
 
 }
 
-export const updateFactura = async (req: Request, res: Response) => {
+export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaType>, res: Response) => {
+    let id = req.params.id;
 
-    res.json({ msg: "Rota do Create" });
-    return;
+    let { number, dateFactura, valor, ProvedorId, ObraId, ConductorId } = req.body;
+
+    const factura = await Factura.findByPk(id);
+
+    if (number === 0 && valor === 0 && dateFactura === undefined && ProvedorId === undefined && ObraId === undefined && ConductorId === undefined) {
+        res.json({ msg: "Nao foi possivel atualizar, informe algum campo a ser atualizado." });
+        return;
+    }
+
+    if (factura) {
+        let updatesFactura: FacturaType = {
+            number: factura.number, dateFactura: factura.dateFactura, valor: factura.valor,
+            ProvedorId: factura.ProvedorId, ObraId: factura.ProvedorId, ConductorId: factura.ConductorId
+        };
+
+        if (number) {
+            updatesFactura.number = number;
+        }
+
+        if (dateFactura) {
+            updatesFactura.dateFactura = dateFactura;
+        }
+
+        if (valor) {
+            updatesFactura.valor = convertToMoney(valor);
+        }
+
+        if (ProvedorId) {
+            updatesFactura.ProvedorId = ProvedorId;
+        }
+
+        if (ObraId) {
+            updatesFactura.ObraId = ObraId;
+        }
+
+        if (ConductorId) {
+            updatesFactura.ConductorId = ConductorId;
+        }
+
+        //Atualizando com as infos que foram informadas apenas
+        factura.update({
+            number: updatesFactura.number, dateFactura: updatesFactura.dateFactura, valor: updatesFactura.valor,
+            ProvedorId: updatesFactura.ProvedorId, ObraId: updatesFactura.ProvedorId, ConductorId: updatesFactura.ConductorId
+        }).then(() => { res.json({ msg: "Obra atualizada com sucesso", factura }); return })
+    }
 }
 
 export const deleteFactura = async (req: Request, res: Response) => {
+    let id = req.params.id;
 
-    res.json({ msg: "Rota do Create" });
-    return;
+    const factura = await Factura.findByPk(id);
+
+    if (factura) {
+        factura.destroy();
+        const actualFacturas = await Factura.findAll();
+        if (actualFacturas) {
+            res.json({ msg: `A factura com ID ${factura.id} e numero ${factura.number} foi removida.`, actualFacturas })
+        }
+    } else {
+        res.status(404);
+        res.json({ msg: `No hay factura con el id ${id} para remover.` })
+    }
 }
