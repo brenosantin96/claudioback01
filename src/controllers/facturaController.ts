@@ -137,7 +137,7 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
         factura.update({
             number: updatesFactura.number, dateFactura: updatesFactura.dateFactura, valor: updatesFactura.valor,
             ProvedorId: updatesFactura.ProvedorId, ObraId: updatesFactura.ProvedorId, ConductorId: updatesFactura.ConductorId
-        }).then(() => { res.json({ msg: "Obra atualizada com sucesso", factura }); return })
+        }).then(() => { res.json({ msg: "Factura atualizada com sucesso", factura }); return })
     }
 }
 
