@@ -23,6 +23,7 @@ const server = express();
 
 
 //rota estática, cors, requests e responses, routes.
+//cors en branco permite que qualquer um possa acessar a aplicacao 
 server.use(cors());
 server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.urlencoded({ extended: true }));
