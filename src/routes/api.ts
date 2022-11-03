@@ -50,3 +50,4 @@ router.post('/ponto', Auth.private, pontoController.registerPoint);
 
 
 export default router;
+
