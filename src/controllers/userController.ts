@@ -94,3 +94,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const ping = (req: Request, res: Response) => {
     res.json({ pong: true });
 }
+
+
+//teste
