@@ -33,6 +33,24 @@ export const listFacturas = async (req: Request, res: Response) => {
 
 }
 
+export const listFacturasByObra = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const facturasByObra = await Factura.findAll({
+        where: {
+            ObraId: parseInt(id)
+        }
+    });
+
+    if (facturasByObra) {
+        res.json({ facturasByObra: facturasByObra });
+        return;
+    } else {
+        res.json({ msg: 'Não foi possível encontrar facturas filtradas por obra' });
+    }
+
+}
+
 export const getOneFactura = async (req: Request, res: Response) => {
     const { id } = req.params;
 
