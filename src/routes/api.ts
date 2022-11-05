@@ -38,6 +38,7 @@ router.post('/facturas', facturaController.createFactura);
 router.put('/facturas/:id', facturaController.updateFactura);
 router.delete('/facturas/:id', facturaController.deleteFactura);
 router.get('/facturasByObra/:id', facturaController.listFacturasByObra);
+router.get('/facturasByObraComplete/:id', facturaController.listFacturasByObraCompleteInfo);
 
 //conductores
 router.get('/conductores', conductorController.listConductores);

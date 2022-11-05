@@ -8,6 +8,7 @@ import { Factura } from '../models/Factura';
 import { Provedor } from '../models/Provedor';
 import { ConductorType } from './conductorController';
 import { convertToMoney } from '../helpers/convertNumbers'
+import { Conductor } from '../models/Conductor';
 
 dotenv.config();
 
@@ -47,6 +48,30 @@ export const listFacturasByObra = async (req: Request, res: Response) => {
         return;
     } else {
         res.json({ msg: 'Não foi possível encontrar facturas filtradas por obra' });
+    }
+
+}
+
+export const listFacturasByObraCompleteInfo = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const facturasByObra = await Factura.findAll({
+        where: {
+            ObraId: parseInt(id)
+        },
+        include: [{
+            model: Conductor,
+        }, {
+            model: Provedor,
+        }]
+    });
+
+    if (facturasByObra) {
+        res.json(facturasByObra);
+        return;
+    } else {
+        res.json({ msg: "Bleh" });
+        return;
     }
 
 }
