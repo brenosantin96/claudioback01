@@ -10,7 +10,7 @@ export function populateDB() {
 
     console.log("Function populateDB Comment by now...")
 
-  /*    let passwordClaudio = '1234';
+    let passwordClaudio = '1234';
     let passwordJose = '4321';
 
     let passHashClaudio: string;
@@ -65,7 +65,7 @@ export function populateDB() {
         console.log("Faturas adicionadas com sucesso!")
      }).catch((err) => {
         console.log("Erro ao fazer factura", err);
-    });  */
+    });  
  
 
 }
