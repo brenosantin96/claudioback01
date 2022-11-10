@@ -34,6 +34,7 @@ router.delete('/obras/:id', obraController.deleteObra);
 //facturas
 router.get('/facturas', facturaController.listFacturas);
 router.get('/facturas/:id', facturaController.getOneFactura);
+router.get('/facturasInfo/:id', facturaController.listFacturaById);
 router.post('/facturas', facturaController.createFactura);
 router.put('/facturas/:id', facturaController.updateFactura);
 router.delete('/facturas/:id', facturaController.deleteFactura);

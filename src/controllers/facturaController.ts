@@ -55,6 +55,25 @@ export const listFacturasAllInfo = async (req: Request, res: Response) => {
 
 }
 
+export const listFacturaById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const factura = await Factura.findByPk(id, {
+        include: [
+            { model: Conductor },
+            { model: Provedor },
+            { model: Obra }]
+    });
+
+    if (factura) {
+        res.json({ factura: factura });
+        return;
+    } else {
+        res.json({ msg: `Não foi possível encontrar factura filtradas pelo ID ${id}` });
+    }
+
+}
+
 export const listFacturasByObraCompleteInfo = async (req: Request, res: Response) => {
     const { id } = req.params;
 
