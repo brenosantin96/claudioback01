@@ -5,3 +5,12 @@ export const formatCurrentMonth = (currentMonth: string): string => {
     return `${months[parseInt(month) - 1]} ${year}`
 
 }
+
+export const isValidDate = (d: Date): boolean => {
+    if (d instanceof Date && !isNaN(d.getTime())) {
+        return true
+    } else {
+        return false
+    }
+}
+
