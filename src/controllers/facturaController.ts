@@ -8,7 +8,6 @@ import { Factura } from '../models/Factura';
 import { Provedor } from '../models/Provedor';
 import { ConductorType } from './conductorController';
 import { convertToMoney } from '../helpers/convertNumbers'
-import { isValidDate } from '../helpers/dateControl'
 import { Conductor } from '../models/Conductor';
 
 dotenv.config();
@@ -143,19 +142,8 @@ export const createFactura = async (req: Request, res: Response) => {
             factura.valor = convertToMoney(valor);
         }
 
-        if (dateFactura) {
-            let isValid = isValidDate(dateFactura);
-
-            if (isValid) {
-                factura.dateFactura = dateFactura;
-            } else {
-                res.json({ error: "Is not a date" })
-                return;
-            }
-
-        }
-
         factura.number = parseInt(number);
+        factura.dateFactura = dateFactura;
         factura.ProvedorId = parseInt(ProvedorId);
         factura.ObraId = parseInt(ObraId);
         factura.ConductorId = parseInt(ConductorId);
@@ -191,15 +179,7 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
         }
 
         if (dateFactura) {
-            let isValid = isValidDate(dateFactura);
-
-            if (isValid) {
-                updatesFactura.dateFactura = dateFactura;
-            } else {
-                res.json({ error: "Is not a date" })
-                return;
-            }
-            
+            updatesFactura.dateFactura = dateFactura;
         }
 
         if (valor) {

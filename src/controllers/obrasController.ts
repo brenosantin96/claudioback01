@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { Obra } from '../models/Obra'
 import dotenv from 'dotenv';
 import { ParamsDictionary } from "express-serve-static-core";
-import { isValidDate } from '../helpers/dateControl'
 
 export type ObraType = {
     name: string;
@@ -57,29 +56,17 @@ export const createObra = async (req: Request<ParamsDictionary, any, ObraType>, 
         obra.presupuesto = presupuesto;
     }
 
-    if (name) {
+    if(name){
         obra.name = name;
     }
-    if (direccion) {
+    if(direccion){
         obra.direccion = direccion;
     }
-    if (presupuesto) {
+    if(presupuesto) {
         obra.presupuesto = presupuesto;
     }
-    if (dateStart) {
-        //if true is Valid if false no is Valid
-        let isValidDatee = isValidDate(dateStart)
-
-        if(isValidDatee){
-            obra.dateStart = dateStart;
-            console.log("Data validada com sucesso! pode passar!")
-        } else {
-            console.log("Data nao esta correta");
-            res.json({error: "Is not a date"})
-            return;
-        }
-
-        
+    if(dateStart){
+        obra.dateStart = dateStart;
     }
 
     const info = await obra.save();
@@ -121,20 +108,8 @@ export const updateObra = async (req: Request<ParamsDictionary, any, ObraType>, 
         }
 
         if (dateStart) {
-
-            let isValidDatee = isValidDate(dateStart)
-
-            if(isValidDatee){
-                updatesObra.dateStart = dateStart;
-                console.log("Data validada com sucesso! pode passar!")
-            } else {
-                console.log("Data nao esta correta");
-                res.json({error: "Is not a date"})
-                return;
-            }
-
-            
-        }
+            updatesObra.dateStart = dateStart;
+        } 
 
         //Atualizando com as infos que foram informadas apenas
         obra.update({

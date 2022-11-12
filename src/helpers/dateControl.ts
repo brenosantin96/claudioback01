@@ -6,11 +6,9 @@ export const formatCurrentMonth = (currentMonth: string): string => {
 
 }
 
-export const isValidDate = (d: Date): boolean => {
-    if (d instanceof Date && !isNaN(d.getTime())) {
-        return true
-    } else {
-        return false
-    }
+export const isValidDate = (d: any): boolean => {
+    return d instanceof Date && !isNaN(d as any);
 }
 
+
+//return d instanceof Date && !isNaN(d);
