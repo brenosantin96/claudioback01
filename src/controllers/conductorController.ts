@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { Conductor } from '../models/Conductor'
+import { Factura } from '../models/Factura';
 
 dotenv.config();
 
@@ -104,6 +105,14 @@ export const deleteConductor = async (req: Request, res: Response) => {
     let id = req.params.id;
 
     const conductor = await Conductor.findByPk(id);
+
+    const fatura = await Factura.findOne({ where: { ConductorId: id } })
+
+    if (fatura) {
+        res.json({ error: "O conductor tem faturas vinculadas a ele. Não é possivel excluir conductor." })
+        res.status(400);
+        return;
+    }
 
     if (conductor) {
         conductor.destroy();

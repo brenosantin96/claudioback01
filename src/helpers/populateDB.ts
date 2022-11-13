@@ -8,7 +8,7 @@ import { Conductor } from '../models/Conductor';
 
 export function populateDB() {
 
-    console.log("Function populateDB Comment by now...")
+    console.log("Function populateDB Commented by now...")
 
   /*    let passwordClaudio = '1234';
     let passwordJose = '4321';

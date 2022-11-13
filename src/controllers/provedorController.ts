@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Provedor, ProvedorInstance } from '../models/Provedor'
 import dotenv from 'dotenv'
+import { Factura } from '../models/Factura';
 
 
 dotenv.config();
@@ -78,6 +79,14 @@ export const deleteProvedor = async (req: Request, res: Response) => {
     let id = req.params.id;
 
     const provedor = await Provedor.findByPk(id);
+
+    const fatura = await Factura.findOne({where: {ProvedorId: id}})
+
+    if(fatura){
+        res.json({error: "O proveedor tem faturas vinculadas a ele. Não é possivel excluir proveedor."})
+        res.status(400);
+        return;
+    }
 
     if (provedor) {
         provedor.destroy();

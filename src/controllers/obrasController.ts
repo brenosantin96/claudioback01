@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Obra } from '../models/Obra'
 import dotenv from 'dotenv';
 import { ParamsDictionary } from "express-serve-static-core";
+import { Factura } from '../models/Factura';
 
 export type ObraType = {
     name: string;
@@ -56,16 +57,16 @@ export const createObra = async (req: Request<ParamsDictionary, any, ObraType>, 
         obra.presupuesto = presupuesto;
     }
 
-    if(name){
+    if (name) {
         obra.name = name;
     }
-    if(direccion){
+    if (direccion) {
         obra.direccion = direccion;
     }
-    if(presupuesto) {
+    if (presupuesto) {
         obra.presupuesto = presupuesto;
     }
-    if(dateStart){
+    if (dateStart) {
         obra.dateStart = dateStart;
     }
 
@@ -80,6 +81,12 @@ export const updateObra = async (req: Request<ParamsDictionary, any, ObraType>, 
     let { name, direccion, presupuesto, dateStart } = req.body;
 
     const obra = await Obra.findByPk(id);
+
+    if (!obra){
+        res.json({err: `Obra com ${id} não encontrada`})
+        res.status(404);
+        return;
+    }
 
     if (name === "" && direccion === "" && !presupuesto && !dateStart) {
         res.json({ msg: "Nao foi possivel atualizar, informe algum campo a ser atualizado." });
@@ -109,7 +116,7 @@ export const updateObra = async (req: Request<ParamsDictionary, any, ObraType>, 
 
         if (dateStart) {
             updatesObra.dateStart = dateStart;
-        } 
+        }
 
         //Atualizando com as infos que foram informadas apenas
         obra.update({
@@ -123,6 +130,14 @@ export const deleteObra = async (req: Request, res: Response) => {
     let id = req.params.id;
 
     const obra = await Obra.findByPk(id);
+    const fatura = await Factura.findOne({ where: { ObraId: id } })
+
+    if (fatura) {
+        res.json({ error: "A obra tem faturas vinculadas a ele. Não é possivel excluir obra." })
+        res.status(400);
+        return;
+    }
+
 
     if (obra) {
         obra.destroy();

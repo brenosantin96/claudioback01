@@ -163,6 +163,12 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
 
     const factura = await Factura.findByPk(id);
 
+    if (!factura){
+        res.json({err: `Factura com ${id} não encontrada`})
+        res.status(404);
+        return;
+    }
+
     if (number === 0 && valor === 0 && dateFactura === undefined && ProvedorId === undefined && ObraId === undefined && ConductorId === undefined) {
         res.json({ msg: "Nao foi possivel atualizar, informe algum campo a ser atualizado." });
         return;
@@ -171,7 +177,7 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
     if (factura) {
         let updatesFactura: FacturaType = {
             number: factura.number, dateFactura: factura.dateFactura, valor: factura.valor,
-            ProvedorId: factura.ProvedorId, ObraId: factura.ProvedorId, ConductorId: factura.ConductorId
+            ProvedorId: factura.ProvedorId, ObraId: factura.ObraId, ConductorId: factura.ConductorId
         };
 
         if (number) {
@@ -201,7 +207,7 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
         //Atualizando com as infos que foram informadas apenas
         factura.update({
             number: updatesFactura.number, dateFactura: updatesFactura.dateFactura, valor: updatesFactura.valor,
-            ProvedorId: updatesFactura.ProvedorId, ObraId: updatesFactura.ProvedorId, ConductorId: updatesFactura.ConductorId
+            ProvedorId: updatesFactura.ProvedorId, ObraId: updatesFactura.ObraId, ConductorId: updatesFactura.ConductorId
         }).then(() => { res.json({ msg: "Factura atualizada com sucesso", factura }); return })
     }
 }
