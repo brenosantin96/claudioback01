@@ -10,10 +10,10 @@ export function populateDB() {
 
     console.log("Function populateDB Commented by now...")
 
-  /*    let passwordClaudio = '1234';
+      let passwordClaudio = '1234';
     let passwordJose = '4321';
 
-    let passHashClaudio: string;s
+    let passHashClaudio: string;
     let passHashJose: string;
 
     //Populate DB with insertions
@@ -27,7 +27,7 @@ export function populateDB() {
             ], { ignoreDuplicates: true }).then(() => console.log("Users data have been saved"));
         })
     })
-
+/*
     Provedor.bulkCreate([
         { name: "Bricomart" },
         { name: 'Veralia' },
