@@ -13,7 +13,7 @@ export function populateDB() {
   /*    let passwordClaudio = '1234';
     let passwordJose = '4321';
 
-    let passHashClaudio: string;
+    let passHashClaudio: string;s
     let passHashJose: string;
 
     //Populate DB with insertions
