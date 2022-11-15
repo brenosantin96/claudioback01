@@ -10,13 +10,13 @@ export function populateDB() {
 
     console.log("Function populateDB Commented by now...")
 
-      let passwordClaudio = '1234';
+    let passwordClaudio = '1234';
     let passwordJose = '4321';
 
     let passHashClaudio: string;
     let passHashJose: string;
 
-    //Populate DB with insertions
+    //Populate DB with insertionss
     bcrypt.hash(passwordClaudio, 10).then((result) => {
         passHashClaudio = result;
         bcrypt.hash(passwordJose, 10).then((result) => {
