@@ -8,7 +8,7 @@ import { Conductor } from '../models/Conductor';
 
 export function populateDB() {
 
-    console.log("Function populateDB Commented by now...")
+  /*  console.log("Function populateDB Commented by now...")
 
     let passwordClaudio = '1234';
     let passwordJose = '4321';
@@ -27,7 +27,7 @@ export function populateDB() {
             ], { ignoreDuplicates: true }).then(() => console.log("Users data have been saved"));
         })
     })
-/*
+
     Provedor.bulkCreate([
         { name: "Bricomart" },
         { name: 'Veralia' },
