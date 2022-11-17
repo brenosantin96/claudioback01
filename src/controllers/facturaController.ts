@@ -9,6 +9,7 @@ import { Provedor } from '../models/Provedor';
 import { ConductorType } from './conductorController';
 import { convertToMoney } from '../helpers/convertNumbers'
 import { Conductor } from '../models/Conductor';
+import {resultsType} from '../types/PaginationType'
 
 dotenv.config();
 
@@ -33,6 +34,40 @@ export const listFacturas = async (req: Request, res: Response) => {
     }
 
 }
+
+/* export const listFacturas2 = async (req: Request, res: Response) => {
+    
+    const page = parseInt(req.query.page as string)
+    const limit = parseInt(req.query.limit as string)
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const results = 
+
+
+    const apiCall : resultsType = {
+
+        next : {
+            page: page + 1,
+            limit: limit
+        },
+
+        previous: {
+            page: page - 1,
+            limit : limit
+        },
+
+
+
+    }
+
+   
+    
+
+
+
+} */
 
 export const listFacturasAllInfo = async (req: Request, res: Response) => {
 
