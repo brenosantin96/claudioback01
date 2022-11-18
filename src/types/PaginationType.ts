@@ -1,11 +1,11 @@
 export type resultsType = {
-    next: {
-        page: number,
-        limit: number
+    next?: {
+        page: number | null,
+        limit: number | null 
     },
-    previous: {
-        page: number,
-        limit: number
+    previous?: {
+        page: number | null,
+        limit: number | null
     },
     results: Object[]
 }

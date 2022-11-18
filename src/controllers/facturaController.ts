@@ -35,39 +35,64 @@ export const listFacturas = async (req: Request, res: Response) => {
 
 }
 
-/* export const listFacturas2 = async (req: Request, res: Response) => {
+ export const listFacturas2 = async (req: Request, res: Response) => {
     
     const page = parseInt(req.query.page as string)
     const limit = parseInt(req.query.limit as string)
 
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
 
-    const results = 
-
-
-    const apiCall : resultsType = {
-
-        next : {
-            page: page + 1,
-            limit: limit
-        },
-
-        previous: {
-            page: page - 1,
-            limit : limit
-        },
+    //vamos pensar page 2 limit 5
+    
 
 
+    const startIndex = (page - 1) * limit; //start vai ser 5  
+    const endIndex = page * limit;  // endindex vai ser 10  
+    const facturas = await Factura.findAll();
+    
 
+    if (facturas) {
+        
+        const resultFacturas : resultsType = {
+            results: facturas
+        }
+
+        if (endIndex < resultFacturas.results.length) {
+            resultFacturas.next = {
+                page: page + 1,
+                limit : limit
+            }
+        }
+    
+        if (startIndex > 0) {
+            resultFacturas.previous = {
+                page: page - 1,
+                limit : limit
+            }
+        }
+
+        const filteredFacturas = facturas.slice(startIndex, endIndex)
+        resultFacturas.results = filteredFacturas;
+        
+        res.json({ facturas: resultFacturas });
+         
+        return;
+    } else {
+        res.json({ msg: 'Não foi possível encontrar facturas' });
     }
+
+    
+
+    
+
+
+    
 
    
     
 
 
 
-} */
+} 
 
 export const listFacturasAllInfo = async (req: Request, res: Response) => {
 
