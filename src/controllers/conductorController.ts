@@ -22,6 +22,13 @@ export const listConductores = async (req: Request, res: Response) => {
 
 }
 
+export const listConductores2 = async (req: Request, res: Response) => {
+    const paginatedResult = res.locals.paginatedResult;
+    res.json({paginatedResult});
+    return;
+
+}
+
 export const getOneConductor = async (req: Request, res: Response) => {
     const { id } = req.params;
 

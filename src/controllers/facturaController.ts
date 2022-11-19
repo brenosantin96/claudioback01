@@ -9,7 +9,8 @@ import { Provedor } from '../models/Provedor';
 import { ConductorType } from './conductorController';
 import { convertToMoney } from '../helpers/convertNumbers'
 import { Conductor } from '../models/Conductor';
-import {resultsType} from '../types/PaginationType'
+import { resultsType } from '../types/PaginationType'
+import { paginatedResults } from '../middlewares/Paginate'
 
 dotenv.config();
 
@@ -35,64 +36,11 @@ export const listFacturas = async (req: Request, res: Response) => {
 
 }
 
- export const listFacturas2 = async (req: Request, res: Response) => {
-    
-    const page = parseInt(req.query.page as string)
-    const limit = parseInt(req.query.limit as string)
-
-
-    //vamos pensar page 2 limit 5
-    
-
-
-    const startIndex = (page - 1) * limit; //start vai ser 5  
-    const endIndex = page * limit;  // endindex vai ser 10  
-    const facturas = await Factura.findAll();
-    
-
-    if (facturas) {
-        
-        const resultFacturas : resultsType = {
-            results: facturas
-        }
-
-        if (endIndex < resultFacturas.results.length) {
-            resultFacturas.next = {
-                page: page + 1,
-                limit : limit
-            }
-        }
-    
-        if (startIndex > 0) {
-            resultFacturas.previous = {
-                page: page - 1,
-                limit : limit
-            }
-        }
-
-        const filteredFacturas = facturas.slice(startIndex, endIndex)
-        resultFacturas.results = filteredFacturas;
-        
-        res.json({ facturas: resultFacturas });
-         
-        return;
-    } else {
-        res.json({ msg: 'Não foi possível encontrar facturas' });
-    }
-
-    
-
-    
-
-
-    
-
-   
-    
-
-
-
-} 
+export const listFacturas2 = async (req: Request, res: Response) => {
+    const paginatedResult = res.locals.paginatedResult;
+    res.json({paginatedResult});
+    return;
+}
 
 export const listFacturasAllInfo = async (req: Request, res: Response) => {
 
@@ -223,8 +171,8 @@ export const updateFactura = async (req: Request<ParamsDictionary, any, FacturaT
 
     const factura = await Factura.findByPk(id);
 
-    if (!factura){
-        res.json({err: `Factura com ${id} não encontrada`})
+    if (!factura) {
+        res.json({ err: `Factura com ${id} não encontrada` })
         res.status(404);
         return;
     }

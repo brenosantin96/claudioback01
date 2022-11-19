@@ -8,7 +8,8 @@ import { Conductor } from '../models/Conductor';
 
 export function populateDB() {
 
-  /*  console.log("Function populateDB Commented by now...")
+    /*
+    console.log("Function populateDB Commented by now...")
 
     let passwordClaudio = '1234';
     let passwordJose = '4321';
@@ -31,7 +32,23 @@ export function populateDB() {
     Provedor.bulkCreate([
         { name: "Bricomart" },
         { name: 'Veralia' },
-        { name: 'Bigmat' }
+        { name: 'Bigmat' },
+        { name: 'Provedor 04' },
+        { name: 'Provedor 05' },
+        { name: 'Provedor 06' },
+        { name: 'Provedor 07' },
+        { name: 'Provedor 08' },
+        { name: 'Provedor 09' },
+        { name: 'Provedor 10' },
+        { name: 'Provedor 11' },
+        { name: 'Provedor 12' },
+        { name: 'Provedor 13' },
+        { name: 'Provedor 13' },
+        { name: 'Provedor 14' },
+        { name: 'Provedor 15' },
+        { name: 'Provedor 16' },
+        { name: 'Provedor 17' },
+        { name: 'Provedor 18' }
     ], { ignoreDuplicates: true }).then(() => { });
 
     Obra.bulkCreate([
@@ -65,7 +82,9 @@ export function populateDB() {
         console.log("Faturas adicionadas com sucesso!")
      }).catch((err) => {
         console.log("Erro ao fazer factura", err);
-    });  */
+    });  
+
+*/
  
 
 }

@@ -18,6 +18,14 @@ export const listProvedores = async (req: Request, res: Response) => {
 
 }
 
+export const listProvedores2 = async (req: Request, res: Response) => {
+    
+    const paginatedResult = res.locals.paginatedResult;
+    res.json({paginatedResult});
+    return;
+
+}
+
 export const getOneProvedor = async (req: Request, res: Response) => {
     let { id } = req.params;
 
