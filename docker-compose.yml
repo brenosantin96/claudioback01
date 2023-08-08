@@ -1,0 +1,39 @@
+version: '3.8'
+
+networks:
+  joao:
+    driver: bridge
+  
+services:
+  mysqldb:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=qwer
+      - MYSQL_DATABASE=claudio2022
+    networks:
+      - joao
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    build: .
+    networks:
+      - joao
+    restart: unless-stopped
+    ports:
+      - 4000:4000
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=root
+      - DB_PASSWORD=qwer
+      - DB_NAME=claudio2022
+      - DB_PORT=3306
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:

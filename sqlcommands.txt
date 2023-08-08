@@ -12,3 +12,22 @@ CREATE TABLE provedores (
   `presupuesto` FLOAT NULL,
   `dateStart` DATE NULL,
   PRIMARY KEY (`id`));
+
+
+   app:
+    build: .
+    restart: always
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: qwer
+      DB_NAME: claudio2022
+      DB_PORT: 3306
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
